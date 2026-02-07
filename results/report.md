@@ -29,6 +29,7 @@ Research question: Can a simple moving average crossover strategy be made profit
 
 - Transaction costs: 0.1% per trade (conservative estimate)
 
+- Price slippage while transacting: 0.05% per trade due to bid-ask spreads and market impact of trade
   
 
 ### Evaluation Metrics
@@ -40,9 +41,9 @@ These are performed for the basic strategy and for every refinement.
 	- Total return (%)
 	- Annualized return
 	- Cumulative P&L curve (visual)
-- Risk-Adjusted Performance
-	- Sharpe Ratio 
-	- Information Ratio - *comparing to a specific benchmark strategy*??
+- Performance Ratio
+	- Sharpe Ratio - Compare with risk free return rate, calculated as the return rate of the 10 year US bond annualized over the time frame.
+	- Information Ratio - compare against S&P 500 returns
 	- Sortino Ratio - bonus, penalizes downside volatility only
 - Risk Metrics
 	- Maximum Drawdown (%)
@@ -55,8 +56,6 @@ These are performed for the basic strategy and for every refinement.
 	- Profit factor (gross profit / gross loss)
 	- Number of trades
 	- Average holding period
-- Benchmark Comparison
-	- Buy-and-hold SPY return over same period
 - Strategy beta to benchmark
 	- Alpha (excess return over benchmark)
 	- Calmar Ratio (return / max drawdown)
@@ -68,9 +67,9 @@ These are performed for the basic strategy and for every refinement.
 	- Test at multiple cost levels: 0 bps, 5 bps, 10 bps, 20 bps
 	- Show where strategy breaks even
 	- Include slippage estimates (bid-ask spread)
-- Out-of-Sample check: test strategy on the latter 30% of the data
 #### II. Robustness testing
-Done on the basic strategy and the best performing refinement. 
+Done the best performing refinement. 
+- Out-of-Sample check: test strategy on the latter 30% of the data
 - Walk-Forward Analysis
 	- train on year 1-3, test on year 4-5
 	- train again on year 6-9, test on years 10-11
@@ -92,6 +91,12 @@ Iteratively added filters and tested on training set:
 
 ## Results
 
+
+## Limitations
+- taxes not considered
+- trades are executed at closing prices, which not be most realistic. Might be more realistic to execute at next day's open
+- full liquidity (may not be applicable for other assets)
+- partial shares allowed
   
 
 ## Failure Cases
