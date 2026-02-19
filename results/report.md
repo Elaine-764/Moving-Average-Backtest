@@ -69,7 +69,7 @@ These are performed for the basic strategy and for every refinement.
 	- Show where strategy breaks even
 	- Include slippage estimates (bid-ask spread)
 #### II. Robustness testing
-Done the best performing refinement. 
+Done on the best performing refinement. 
 - Out-of-Sample check: test strategy on the latter 30% of the data
 - Walk-Forward Analysis
 	- train on year 1-3, test on year 4-5
