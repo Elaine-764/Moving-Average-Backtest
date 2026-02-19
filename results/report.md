@@ -21,7 +21,8 @@ Research question: Can a simple moving average crossover strategy be made profit
 
 ### Baseline Strategy
 
-- Entry: Buy when 50-day MA crosses above 200-day MA
+- Entry: Buy when 20-day MA crosses above 30-day MA
+	- reasoning for 20/50 split - tested 50-200 before, too few number of trades. 20/50 gives statistically meaningful number of trades and reasonal holding periods 
 
 - Exit: Sell when 50-day MA crosses below 200-day MA
 
@@ -82,10 +83,19 @@ Done the best performing refinement.
 Iteratively added filters and tested on training set:
 
 1. V1: Volatility filter (ATR-based)
+	- threshold is don't trade in the top 30% most volatile times
+	- ATR (Average True Range) rolling window = 14 days
 
 2. V2: Regime detection (trending vs ranging markets)
+	- only trade when market is trending, as measured by Welles Wilder's Average Directional Movement Index (ADX) - trade when ADX > 20
+	- EMA preferred because it responds to market changes more rapidly, less lag, it's a standard in Wilder's formula
 
-3. V3: Dynamic position sizing based on volatility
+3. V3: Dynamic position sizing based on volatility: varying the position size based on volatility
+	- position size dependent on the following formula (inspired by the Kelly Criterion): 
+	Position size = Base_capital × (Target_volatility / Current_volatility)
+		- Target_volatility is the comfort level, in this case the 75th percentile of the ATR in the training period. This only reduces position in times of extreme volatility
+	- minimum position is 30% of total capital, maximum is 100%
+	- volatility depends on ATR, trade more when it's less risky
 
   
 
@@ -94,7 +104,7 @@ Iteratively added filters and tested on training set:
 
 ## Limitations
 - taxes not considered
-- trades are executed at closing prices, which not be most realistic. Might be more realistic to execute at next day's open
+- trades are executed at closing prices, which may not be most realistic. Might be more realistic to execute at next day's open
 - full liquidity (may not be applicable for other assets)
 - partial shares allowed
   

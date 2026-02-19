@@ -353,7 +353,7 @@ def consistency(df, window = 252):
 def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     # test strategy profitability at different transaction cost levels
 
-    cost_level_bps = [0, 5, 10, 15, 20, 30, 50]
+    cost_level_bps = np.linspace(0, 50, 6)
     cost_levels = [c / 10000 for c in cost_level_bps]
 
     results = []
@@ -385,6 +385,13 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
         break_even_cost = results_df.loc[break_even_idx[0], 'cost_bps']
     else:
         break_even_cost = None
+
+    def get_lims(series, padding=0.05):
+        """Calculate y-axis limits with padding"""
+        min_val = series.min()
+        max_val = series.max()
+        pad = (max_val - min_val) * padding
+        return [min_val - pad, max_val + pad]
     
     # Create visualizations
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
@@ -399,7 +406,7 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     axes[0, 0].set_title('Total Return vs Transaction Costs')
     axes[0, 0].set_xlabel('Transaction Cost (basis points)')
     axes[0, 0].set_ylabel('Total Return (%)')
-    axes[0, 0].set_ylim([40, 70]) 
+    # axes[0, 0].set_ylim([40, 70]) 
     axes[0, 0].grid(True, alpha=0.3)
     # axes[0, 0].legend()
     
@@ -410,7 +417,7 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     axes[0, 1].set_title('Annualized Return vs Transaction Costs')
     axes[0, 1].set_xlabel('Transaction Cost (basis points)')
     axes[0, 1].set_ylabel('Annualized Return (%)')
-    axes[0, 1].set_ylim([4, 7]) 
+    # axes[0, 1].set_ylim([4, 7]) 
     axes[0, 1].grid(True, alpha=0.3)
     
     # 3. Sharpe ratio vs cost
@@ -420,7 +427,7 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     axes[1, 0].set_title('Sharpe Ratio vs Transaction Costs')
     axes[1, 0].set_xlabel('Transaction Cost (basis points)')
     axes[1, 0].set_ylabel('Sharpe Ratio')
-    axes[1, 0].set_ylim([.3, .65]) 
+    # axes[1, 0].set_ylim([.3, .65]) 
     axes[1, 0].grid(True, alpha=0.3)
     
     # 4. Final portfolio value vs cost
@@ -432,10 +439,23 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     axes[1, 1].set_ylabel('Final Value ($)')
 
     # Set y-axis range
-    axes[1, 1].set_ylim([13000, 18000]) 
+    # axes[1, 1].set_ylim([13000, 18000]) 
 
     # axes[1, 1].legend()
     axes[1, 1].grid(True, alpha=0.3, axis='y')
+
+    # 1. Total return vs cost
+    axes[0, 0].set_ylim(get_lims(results_df['total_return'] * 100))
+
+    # 2. Annualized return vs cost
+    axes[0, 1].set_ylim(get_lims(results_df['annualized_return'] * 100))
+
+    # 3. Sharpe ratio vs cost
+    axes[1, 0].set_ylim(get_lims(results_df['sharpe_ratio']))
+
+    # 4. Final portfolio value vs cost
+    axes[1, 1].set_ylim(get_lims(results_df['final_value']))
+
     plt.tight_layout()
     plt.show()
     
@@ -451,3 +471,4 @@ def sensitivity(strategy_func, inv_amt, prices_df, short_ma, long_ma):
     
     return results_df
 
+# def all_core_metrics(df):
