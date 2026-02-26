@@ -45,12 +45,12 @@ def pnl(df, investment_amount, strategy_name, benchmark_name, graph_title):
     print(f'\nAnnualized across {num_years:.4f} years: ')
 
     # Strategy annualized return
-    strategy_annual_ret = np.pow(1 + strategy_total_return, 1/num_years) - 1
+    strategy_annual_ret = np.power(1 + strategy_total_return, 1/num_years) - 1
     print(f'{strategy_name} returned {(100 * strategy_annual_ret):.4f}% per year')
 
 
     # buy and hold market return
-    market_annual_ret = np.pow(1 + market_total_return, 1/num_years) - 1
+    market_annual_ret = np.power(1 + market_total_return, 1/num_years) - 1
     print(f'{benchmark_name} returned {(100 * market_annual_ret):.4f}% per year')
 
     # plotting
