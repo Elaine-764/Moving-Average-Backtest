@@ -38,7 +38,7 @@ The report includes:
 - Discussion of why refinements failed and what would be required for success
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 ```
 trading-strategy-backtest/
 │
@@ -83,10 +83,7 @@ trading-strategy-backtest/
 │   │   ├── monte_carlo.
 │   │   ├── out_of_sample.pngpng
 │   │   └── walk_forward_results.png
-│   └── DETAILED_REPORT.md            # **FULL ANALYSIS & FINDINGS**
-│
-└── tests/                             # Unit tests (optional)
-    └── test_strategies.py
+└── └── DETAILED_REPORT.md            # **FULL ANALYSIS & FINDINGS**
 ```
 
 ---
