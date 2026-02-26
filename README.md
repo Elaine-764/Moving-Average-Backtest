@@ -67,7 +67,7 @@ trading-strategy-backtest/
 │   ├── 04_trend_detection.ipynb      # Add ADX regime detection
 │   ├── 05_position_resize.ipynb      # Add dynamic position sizing
 │   ├── 06_robustness_testing.ipynb   # Walk-forward, Monte Carlo, regime analysis
-│   └──  07_graph_generation.ipynb    # generate graph
+│   └── 07_graph_generation.ipynb    # generate graph
 │
 ├── src/                              # Reusable Python modules
 │   ├── strategies.py                 # All strategy implementations
