@@ -84,7 +84,7 @@ Done on the best performing refinement only.
 | Number of Trades      |        36         |                              33 | 30                            | 36                              |
 
 ### Out-of-Sample Validation (Test Period: 2022-2025)
-Final portfolio value: 13271.214104043822 on 2025-12-30 00:00:00
+Final portfolio value: 13271.214104043822 on 2025-12-30 00:00:00 
 Strategy returned 32.712141040438226% from 2022-09-09 00:00:00 to 2025-12-30 00:00:00
 Market returned 77.30561272268599 from 2022-09-09 00:00:00 to 2025-12-30 00:00:00
 
